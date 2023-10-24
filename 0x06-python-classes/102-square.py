@@ -1,69 +1,63 @@
 #!/usr/bin/python3
-
-"""
-    This module is Task 9 of the project '0x06. Python -
-    Classes and Objects which is a continuation of task 4
-    and adds comparators
+""" Class Square that defines a square by
+    Private instance attribute: size
+    Private instance attirubute: position
+    Getter and Setters
+    Instantiation with optional size
+    size must be an integer
+    Public instance method: def area(self)
+    Public instance method: def my_print(self)
+    Allow compare with other
 """
 
 
 class Square:
-    """ A Square class """
+    """Class constructor"""
     def __init__(self, size=0):
-        """ initialize square with a specific size
-        Args:
-            __size: size of the square
-        """
+        if type(size) != int:
+            raise TypeError('size must be an integer')
+        if size < 0:
+            raise ValueError('size must be >= 0')
         self.__size = size
 
-    def area(self):
-        """ compute the area of a square
-        Return:
-            the area
-        """
-        return self.__size ** 2
-
+    """Size getter"""
     @property
     def size(self):
-        """ getter method for the __size private instance
-            attribute
-
-        Return:
-            __size
-        """
         return self.__size
 
+    """Size setter"""
     @size.setter
     def size(self, value):
-        """ setter method for the __size private instance
-            attribute
-        """
-        if not isinstance(value, int):
-            raise TypeError("size must be an integer")
+        if type(value) != int:
+            raise TypeError('size must be an integer')
         if value < 0:
-            raise ValueError("size must be >= 0")
+            raise ValueError('size must be >= 0')
         self.__size = value
 
-    def __eq__(self, other):
-        """ evaluate if two squares are equal """
-        return self.__size == other.__size
+    """returns the current square area"""
+    def area(self):
+        return self.__size ** 2
 
-    def __lt__(self, other):
-        """ evaluate if a square is less than another """
-        return self.__size < other.__size
-
-    def __gt__(self, other):
-        """ evaluate if a square is greater than another """
-        return self.__size > other.__size
-
-    def __ne__(self, other):
-        """ evaluate if a square is different from another """
-        return not(self == other)
-
-    def __ge__(self, other):
-        """ evaluate if a square is greater than or equal to another """
-        return (self == other) or (self > other)
-
+    """True if self is less or equal than other"""
     def __le__(self, other):
-        """ evaluate if a square is less than or equal to another """
-        return (self == other) or (self < other)
+        return self.area() <= other.area()
+
+    """True if self is less than other"""
+    def __lt__(self, other):
+        return self.area() < other.area()
+
+    """True if self is equal than other"""
+    def __eq__(self, other):
+        return self.area() == other.area()
+
+    """True if self is greater or equal than other"""
+    def __ge__(self, other):
+        return self.area() >= other.area()
+
+    """True if self is greater than other"""
+    def __gt__(self, other):
+        return self.area() > other.area()
+
+    """True if self is not equeal other"""
+    def __ne__(self, other):
+        return self.area() != other.area()

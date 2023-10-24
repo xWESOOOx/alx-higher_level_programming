@@ -1,96 +1,78 @@
 #!/usr/bin/python3
-
-"""
-    This module is Task 8 of the project '0x06. Python -
-    Classes and Objects' which is a continuation of task 6
-    which adds functionality to print a Square instance
+""" Class Square that defines a square by
+    Private instance attribute: size
+    Private instance attirubute: position
+    Getter and Setters
+    Instantiation with optional size
+    size must be an integer
+    Public instance method: def area(self)
+    Public instance method: def my_print(self)
+    __str__ same behavior than my_print()
 """
 
 
 class Square:
-    """ A Square class """
+    """Class constructor"""
     def __init__(self, size=0, position=(0, 0)):
-        """ initialize square with a specific size
-        Args:
-            __size: size of the square
-        """
         self.size = size
         self.position = position
 
-    def area(self):
-        """ compute the area of a square
-        Return:
-            the area
-        """
-        return self.__size ** 2
-
+    """Size getter"""
     @property
     def size(self):
-        """ getter method for the __size private instance
-            attribute
-
-        Return:
-            __size
-        """
         return self.__size
 
-    @property
-    def position(self):
-        """ getter method for the __position private
-            instance attribute
-
-        Return:
-            __position
-        """
-        return self.__position
-
+    """Size setter"""
     @size.setter
     def size(self, value):
-        """ setter method for the __size private instance
-            attribute
-        """
-        if not isinstance(value, int):
-            raise TypeError("size must be an integer")
+        if type(value) != int:
+            raise TypeError('size must be an integer')
         if value < 0:
-            raise ValueError("size must be >= 0")
+            raise ValueError('size must be >= 0')
         self.__size = value
 
+    """Position getter"""
+    @property
+    def position(self):
+        return self.__position
+
+    """Position getter"""
     @position.setter
     def position(self, value):
-        """ setter method for the __position private
-            instance attribute
-        """
-        errormsg = "position must be a tuple of two positive integers"
-        if (not isinstance(value, tuple)) or len(value) != 2:
-            raise TypeError(errormsg)
-        if not isinstance(value[0], int) or not isinstance(value[1], int):
-            raise TypeError(errormsg)
+        if type(value) != tuple or len(value) != 2:
+            raise TypeError('position must be a tuple of 2 positive integers')
+        if type(value[0]) != int or type(value[1]) != int:
+            raise TypeError('position must be a tuple of 2 positive integers')
         if value[0] < 0 or value[1] < 0:
-            raise TypeError(errormsg)
+            raise ValueError('position must be a tuple of 2 positive integers')
         self.__position = value
 
-    def my_print(self):
-        """ prints a square using the character #
-            if size is 0, prints a blank line
-            prints the square on the coordinate specified by position by
-            using blank space, if position[1] > 0 don't use space
-        """
-        if self.__size == 0:
-            print()
-        else:
-            for i in range(self.__position[1]):
-                print()
-            for k in range(self.__size):
-                print("{}{}".format(" "*self.__position[0], "#"*self.__size))
+    """returns the current square area"""
+    def area(self):
+        return self.__size ** 2
 
+    """prints in stdout the square with the character #"""
+    def my_print(self):
+        if self.size != 0:
+            if self.position[1] is not 0:
+                print('\n' * self.position[1], end='')
+            for ch in range(self.size):
+                print(' ' * self.position[0], end='')
+                print('#' * self.size)
+        else:
+            print()
+
+    """print(square_obj) == square_obj.my_print()"""
     def __str__(self):
-        """ print an instance of Square """
-        squarestr = ""
-        if self.__size > 0:
-            for i in range(self.__position[1]):
-                squarestr += "\n"
-            for j in range(self.__size):
-                squarestr += (" "*self.__position[0]) + ("#"*self.__size)
-                if j != self.__size - 1:
-                    squarestr += "\n"
-        return squarestr
+        to_print = ''
+        if self.size != 0:
+            if self.position[1] is not 0:
+                to_print += '\n' * self.position[1]
+            for ch in range(self.size):
+                to_print += ' ' * self.position[0]
+                to_print += '#' * self.size
+                if ch != self.__size - 1:
+                    to_print += '\n'
+        else:
+            to_print = ''
+        return to_print
