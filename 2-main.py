@@ -1,15 +1,5 @@
 #!/usr/bin/python3
-safe_print_list_integers = \
-    __import__('2-safe_print_list_integers').safe_print_list_integers
+append_write = __import__('2-append_write').append_write
 
-my_list = [1, 2, 3, 4, 5]
-
-nb_print = safe_print_list_integers(my_list, 2)
-print("nb_print: {:d}".format(nb_print))
-
-my_list = [1, 2, 3, "School", 4, 5, [1, 2, 3]]
-nb_print = safe_print_list_integers(my_list, len(my_list))
-print("nb_print: {:d}".format(nb_print))
-
-nb_print = safe_print_list_integers(my_list, len(my_list) + 2)
-print("nb_print: {:d}".format(nb_print))
+nb_characters_added = append_write("file_append.txt", "This School is so cool!\n")
+print(nb_characters_added)

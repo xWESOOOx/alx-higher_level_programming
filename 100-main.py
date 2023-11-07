@@ -1,18 +1,11 @@
 #!/usr/bin/python3
-safe_print_integer_err = \
-    __import__('100-safe_print_integer_err').safe_print_integer_err
+append_after = __import__('100-append_after').append_after
 
-value = 89
-has_been_print = safe_print_integer_err(value)
-if not has_been_print:
-    print("{} is not an integer".format(value))
+append_after("append_after_100.txt", "Python", "\"C is fun!\"\n")
 
-value = -89
-has_been_print = safe_print_integer_err(value)
-if not has_been_print:
-    print("{} is not an integer".format(value))
-
-value = "School"
-has_been_print = safe_print_integer_err(value)
-if not has_been_print:
-    print("{} is not an integer".format(value))
+guillaume@ubuntu:~/0x0B$ cat append_after_100.txt
+At Holberton School,
+Python is really important,
+But it can be very hard if:
+- You don't get all Pythonic tricks
+- You don't have strong C knowledge.
